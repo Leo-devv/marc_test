@@ -189,7 +189,7 @@ export async function POST(req: NextRequest) {
     const errMsg = error instanceof Error ? error.message : String(error);
     const errStack = error instanceof Error ? error.stack : "";
     console.error("Chat error:", errMsg, errStack);
-    return new Response(JSON.stringify({ error: "Chat failed", detail: errMsg }), {
+    return new Response(JSON.stringify({ error: "Chat failed" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
