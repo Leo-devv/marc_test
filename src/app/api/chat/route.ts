@@ -186,8 +186,10 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("Chat error:", error);
-    return new Response(JSON.stringify({ error: "Chat failed" }), {
+    const errMsg = error instanceof Error ? error.message : String(error);
+    const errStack = error instanceof Error ? error.stack : "";
+    console.error("Chat error:", errMsg, errStack);
+    return new Response(JSON.stringify({ error: "Chat failed", detail: errMsg }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
