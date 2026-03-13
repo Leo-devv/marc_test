@@ -28,7 +28,7 @@ function formatDate(dateStr: string): string {
 }
 
 export default function BookingsPage() {
-  const { data: session, status: authStatus } = useSession();
+  const { status: authStatus } = useSession();
   const router = useRouter();
   const [bookings, setBookings] = useState<IBooking[]>([]);
   const [loading, setLoading] = useState(true);

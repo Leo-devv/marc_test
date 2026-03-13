@@ -20,7 +20,6 @@ export default function ProviderDetailPage({
   const [loading, setLoading] = useState(true);
   const [showAuthGate, setShowAuthGate] = useState(false);
   const [showBookingDialog, setShowBookingDialog] = useState(false);
-  const [bookingSuccess, setBookingSuccess] = useState<{ ref: string } | null>(null);
 
   useEffect(() => {
     fetch(`/api/providers?slug=${slug}`)
@@ -116,34 +115,7 @@ export default function ProviderDetailPage({
         provider={provider}
         isAuthenticated={!!session}
         onRequestBooking={handleRequestBooking}
-        bookingSubmitted={!!bookingSuccess}
       />
-
-      {/* Booking success banner */}
-      {bookingSuccess && (
-        <div className="mx-auto mt-6 max-w-4xl">
-          <div className="rounded-2xl border border-green-200 bg-green-50 p-5 dark:border-green-800 dark:bg-green-950/30">
-            <div className="flex items-start gap-3">
-              <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/50">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-green-600 dark:text-green-400"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              </div>
-              <div className="flex-1">
-                <p className="font-semibold text-green-800 dark:text-green-300">Booking request sent</p>
-                <p className="mt-0.5 text-sm text-green-700 dark:text-green-400/80">
-                  Your request (Ref: {bookingSuccess.ref}) has been sent to {provider.displayName}.
-                  You&apos;ll be notified once they confirm.
-                </p>
-                <button
-                  onClick={() => router.push("/bookings")}
-                  className="mt-3 rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-500"
-                >
-                  View My Bookings
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       <BookingDialog
         provider={provider}

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { SearchBar } from "@/components/search/SearchBar";
 import { ResultTabs } from "@/components/search/ResultTabs";
 import { IProvider, ParsedIntent } from "@/types";
@@ -62,7 +61,6 @@ function FlipText({ labels }: { labels: string[] }) {
 
 function SearchContent() {
   const searchParams = useSearchParams();
-  const { data: session } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [aiMessage, setAiMessage] = useState("");
   const [streamingText, setStreamingText] = useState("");
@@ -197,8 +195,8 @@ function SearchContent() {
         {/* AI response — subtle inline note */}
         {!isLoading && displayMessage && (
           <div className="mb-4 flex items-start gap-2.5">
-            <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md bg-gradient-to-br from-rose-400 to-pink-500">
-              <span className="text-[9px] font-bold text-white">C</span>
+            <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-rose-400 to-pink-500">
+              <svg width="11" height="11" viewBox="0 0 20 20" fill="none"><path d="M14.5 5.2c-.9-1.5-2.3-2.4-4.2-2.4C7 2.8 4.5 5.6 4.5 9.5c0 3.8 2.4 6.5 5.7 6.5 2 0 3.4-1 4.3-2.5" stroke="white" strokeWidth="2.5" strokeLinecap="round"/></svg>
             </div>
             <p className="text-sm leading-relaxed text-muted-foreground">{displayMessage}</p>
           </div>
@@ -207,8 +205,8 @@ function SearchContent() {
         {/* Streaming text while results are showing */}
         {isLoading && providers.length > 0 && streamingText && (
           <div className="mb-4 flex items-start gap-2.5">
-            <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md bg-gradient-to-br from-rose-400 to-pink-500">
-              <span className="text-[9px] font-bold text-white">C</span>
+            <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-rose-400 to-pink-500">
+              <svg width="11" height="11" viewBox="0 0 20 20" fill="none"><path d="M14.5 5.2c-.9-1.5-2.3-2.4-4.2-2.4C7 2.8 4.5 5.6 4.5 9.5c0 3.8 2.4 6.5 5.7 6.5 2 0 3.4-1 4.3-2.5" stroke="white" strokeWidth="2.5" strokeLinecap="round"/></svg>
             </div>
             <p className="text-sm leading-relaxed text-muted-foreground">
               {streamingText}
@@ -219,7 +217,7 @@ function SearchContent() {
 
         {/* Results grid */}
         {providers.length > 0 && (
-          <ResultTabs allMatches={providers} isAuthenticated={!!session} />
+          <ResultTabs allMatches={providers} />
         )}
 
         {/* No results initial state */}

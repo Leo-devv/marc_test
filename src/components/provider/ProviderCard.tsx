@@ -6,7 +6,6 @@ import { IProvider } from "@/types";
 
 interface ProviderCardProps {
   provider: IProvider;
-  isAuthenticated: boolean;
 }
 
 export function ProviderCard({ provider }: ProviderCardProps) {

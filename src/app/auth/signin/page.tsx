@@ -40,8 +40,11 @@ function SignInForm() {
         {/* Brand */}
         <div className="mb-8 text-center">
           <Link href="/" className="inline-flex items-center gap-2.5">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 shadow-md shadow-pink-500/20">
-              <span className="text-base font-bold text-white">C</span>
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-rose-400 to-pink-500 shadow-md shadow-pink-500/20">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.5 5.2c-.9-1.5-2.3-2.4-4.2-2.4C7 2.8 4.5 5.6 4.5 9.5c0 3.8 2.4 6.5 5.7 6.5 2 0 3.4-1 4.3-2.5" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+                <circle cx="16" cy="4" r="1.3" fill="white" opacity="0.7"/>
+              </svg>
             </div>
             <span className="text-xl font-semibold tracking-tight">Concierge</span>
           </Link>

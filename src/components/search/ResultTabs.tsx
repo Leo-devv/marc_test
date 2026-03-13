@@ -5,10 +5,9 @@ import { IProvider } from "@/types";
 
 interface ResultListProps {
   allMatches: IProvider[];
-  isAuthenticated: boolean;
 }
 
-export function ResultTabs({ allMatches, isAuthenticated }: ResultListProps) {
+export function ResultTabs({ allMatches }: ResultListProps) {
   if (allMatches.length === 0) return null;
 
   const onlineCount = allMatches.filter((p) => p.availability.isAvailableNow).length;
@@ -34,7 +33,7 @@ export function ResultTabs({ allMatches, isAuthenticated }: ResultListProps) {
             className="animate-card-in"
             style={{ animationDelay: `${i * 50}ms` }}
           >
-            <ProviderCard provider={provider} isAuthenticated={isAuthenticated} />
+            <ProviderCard provider={provider} />
           </div>
         ))}
       </div>

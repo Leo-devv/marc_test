@@ -2,11 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
   const { data: session } = useSession();
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -26,8 +28,11 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-rose-400 to-pink-500">
-            <span className="text-xs font-bold text-white">C</span>
+          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-rose-400 to-pink-500">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.5 5.2c-.9-1.5-2.3-2.4-4.2-2.4C7 2.8 4.5 5.6 4.5 9.5c0 3.8 2.4 6.5 5.7 6.5 2 0 3.4-1 4.3-2.5" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+              <circle cx="16" cy="4" r="1.3" fill="white" opacity="0.7"/>
+            </svg>
           </div>
           <span className="text-base font-semibold tracking-tight">Concierge</span>
         </Link>
@@ -71,7 +76,7 @@ export function Header() {
             </div>
           ) : (
             <button
-              onClick={() => signIn()}
+              onClick={() => signIn(undefined, { callbackUrl: pathname })}
               className="rounded-lg bg-foreground px-3.5 py-1.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
             >
               Sign in

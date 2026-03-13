@@ -9,7 +9,6 @@ interface ProviderProfileProps {
   provider: IProvider;
   isAuthenticated: boolean;
   onRequestBooking: () => void;
-  bookingSubmitted?: boolean;
 }
 
 const langNames: Record<string, string> = {
@@ -33,7 +32,7 @@ function getAvailabilitySummary(provider: IProvider): string {
   return "Select days · By appointment";
 }
 
-export function ProviderProfile({ provider, isAuthenticated, onRequestBooking, bookingSubmitted }: ProviderProfileProps) {
+export function ProviderProfile({ provider, isAuthenticated, onRequestBooking }: ProviderProfileProps) {
   return (
     <div className="mx-auto max-w-4xl">
       <PhotoGallery photos={provider.photos} name={provider.displayName} isAuthenticated={isAuthenticated} />
@@ -151,21 +150,12 @@ export function ProviderProfile({ provider, isAuthenticated, onRequestBooking, b
               </div>
             </div>
 
-            {bookingSubmitted ? (
-              <div className="w-full rounded-2xl border border-green-200 bg-green-50 px-6 py-4 text-center dark:border-green-800 dark:bg-green-950/30">
-                <span className="flex items-center justify-center gap-2 text-sm font-semibold text-green-700 dark:text-green-400">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                  Request sent
-                </span>
-              </div>
-            ) : (
-              <button
-                onClick={onRequestBooking}
-                className="w-full rounded-2xl bg-gradient-to-r from-rose-400 to-pink-500 px-6 py-4 text-base font-semibold text-white shadow-md transition-all hover:shadow-lg hover:brightness-105 active:scale-[0.98]"
-              >
-                Request Booking
-              </button>
-            )}
+            <button
+              onClick={onRequestBooking}
+              className="w-full rounded-2xl bg-gradient-to-r from-rose-400 to-pink-500 px-6 py-4 text-base font-semibold text-white shadow-md transition-all hover:shadow-lg hover:brightness-105 active:scale-[0.98]"
+            >
+              Request Booking
+            </button>
           </div>
         </div>
       </div>
